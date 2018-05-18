@@ -26,8 +26,7 @@
       var queryResultsObservable = Orwell.getObservable('queryResults');
       return {
         getQueryResults: getQueryResults,
-        getProfileEndpoint: getProfileEndpoint,
-        getPipelineEndpoint: getPipelineEndpoint
+        getSolrEndpoint: getSolrEndpoint
       };
 
       /**
@@ -42,7 +41,7 @@
 
         var queryString = QueryBuilder.objectToURLString(query);
 
-        var fullUrl = getQueryUrl(ConfigService.getIfQueryProfile()) + '?' + queryString;
+        var fullUrl = getQueryUrl() + '?' + queryString;
 
         $http
           .get(fullUrl)
@@ -68,35 +67,22 @@
       /**
        * Returns the appropriate base url for an endpoint
        *
-       * @param  {Boolean} isProfiles Determines which endpoint type to return;
        * @return {string}             The URL endpoint for the query without parameters.
        */
-      function getQueryUrl(isProfiles) {
-        var profilesEndpoint = getProfileEndpoint(ConfigService.getQueryProfile(), 'select');
-        var pipelinesEndpoint = getPipelineEndpoint(ConfigService.getQueryPipeline(), 'select');
+      function getQueryUrl() {
+        var solrEndpoint = getSolrEndpoint( 'select');
+//      $log.log('======' + solrEndpoint);
 
-        return isProfiles ? profilesEndpoint : pipelinesEndpoint;
+        return solrEndpoint;
       }
 
-      function getProfileEndpoint(profile, requestHandler){
-        return ApiBase.getEndpoint() + 'api/apollo/collections/' +
-          ConfigService.getCollectionName() + '/query-profiles/' +
-          profile + '/' + requestHandler;
-      }
-
-      function getPipelineEndpoint(pipeline, requestHandler){
-        return ApiBase.getEndpoint() + 'api/apollo/' + getApp() + 'query-pipelines/' +
-          pipeline + '/collections/' + ConfigService.getCollectionName() +
+      function getSolrEndpoint( requestHandler){
+        var urlPart = ApiBase.getEndpoint() + 'solr/' + // RWL
+          ConfigService.getCollectionName() +
           '/' + requestHandler;
+        return urlPart;
       }
 
-      function getApp(){
-	  var FusionApp = ConfigService.getAppName() ;
-	  if( FusionApp !== '') {
-	      FusionApp = 'apps/' +  FusionApp + '/'
-	  }
-	  return FusionApp;
-      }
     }
   }
 })();

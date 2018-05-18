@@ -18,8 +18,7 @@
       var deferred = $q.defer();
 
       var queryString = QueryBuilder.objectToURLString(query);
-
-      var fullUrl = getQueryUrl(ConfigService.getIfTypeaheadQueryProfile()) + '?' + queryString;
+      var fullUrl = getQueryUrl() + '?' + queryString;
 
       $http
         .get(fullUrl)
@@ -40,14 +39,11 @@
     /**
      * Private function
      */
-    function getQueryUrl(isProfile){
+    function getQueryUrl(){
       var requestHandler = ConfigService.getTypeaheadRequestHandler();
 
-      var profileUrl = QueryDataService.getProfileEndpoint(ConfigService.getTypeaheadProfile(), requestHandler);
-
-      var pipelineUrl = QueryDataService.getPipelineEndpoint(ConfigService.getTypeaheadPipeline(), requestHandler);
-
-      return isProfile?profileUrl:pipelineUrl;
+      var solrUrl = QueryDataService.getSolrEndpoint( requestHandler);
+      return solrUrl; // RWL
     }
 
   }

@@ -17,10 +17,6 @@
       collection: 'default',
       logo_location: 'assets/img/logo/lucidworks-white.svg',
       query_debug: false,
-      query_app_id: 'default',
-      query_pipeline_id: 'default',
-      query_profile_id: 'default',
-      use_query_profile: false,
       search_app_title: 'Fusion Seed App',
       head_field: 'title',
       subhead_field: 'subtitle',
@@ -35,9 +31,6 @@
       signals_document_id: 'id',
       facets: [],
       docs_per_page: 10,
-      typeahead_use_query_profile: false,
-      typeahead_query_pipeline_id: 'default',
-      typeahead_query_profile_id: 'default',
       typeahead_fields: ['id'],
       typeahead_requesthandler: 'select',
       landing_page_redirect: true,
@@ -84,20 +77,13 @@
         init: init, //TODO: Only for test env
         config: appConfig,
         getFusionUrl: getFusionUrl,
-        getQueryProfile: getQueryProfile,
         getCollectionName: getCollectionName,
-        getAppName: getAppName,
-        getQueryPipeline: getQueryPipeline,
         getLoginCredentials: getLoginCredentials,
-        getIfQueryProfile: getIfQueryProfile,
         getFieldLabels: getFieldLabels,
         getFieldsToDisplay: getFieldsToDisplay,
         getTypeaheadConfig: getTypeaheadConfig,
         getTypeaheadRequestHandler: getTypeaheadRequestHandler,
         getTypeaheadField: getTypeaheadField,
-        getIfTypeaheadQueryProfile: getIfTypeaheadQueryProfile,
-        getTypeaheadProfile: getTypeaheadProfile,
-        getTypeaheadPipeline: getTypeaheadPipeline,
         getLandingPageRedirect: getLandingPageRedirect,
         getFields: {
           all: getAllFields,
@@ -118,27 +104,11 @@
       vm.config = appConfig;
     }
 
-    function getIfQueryProfile() {
-      return appConfig.use_query_profile;
-    }
-
     /**
      * Returns a fusion URL complete w/ endslash.
      */
     function getFusionUrl() {
       return appConfig.host + ':' + appConfig.port + '/';
-    }
-
-    function getAppName() {
-      return appConfig.query_app_id;
-    }
-
-    function getQueryPipeline() {
-      return appConfig.query_pipeline_id;
-    }
-
-    function getQueryProfile() {
-      return appConfig.query_profile_id;
     }
 
     function getLoginCredentials() {
@@ -196,18 +166,6 @@
         return item.match(/^typeahead/);
       }).value();
       return _.pick(appConfig, onlyTypeAheadKeys);
-    }
-
-    function getIfTypeaheadQueryProfile() {
-      return appConfig.typeahead_use_query_profile;
-    }
-
-    function getTypeaheadPipeline(){
-      return appConfig.typeahead_query_pipeline_id;
-    }
-
-    function getTypeaheadProfile(){
-      return appConfig.typeahead_query_profile_id;
     }
 
     function getTypeaheadRequestHandler(){

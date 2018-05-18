@@ -23,7 +23,7 @@ gulp.task('browsersync', ['build'], function() {
   // build middleware.
   var middleware = [
     log(),
-    proxyMiddleware('/api', proxyConfig),
+    proxyMiddleware('/solr', proxyConfig), // RWL
     historyFallback({ index: '/' + openPath + '/index.html' })
   ];
 
