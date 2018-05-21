@@ -103,11 +103,11 @@ appConfig = { //eslint-disable-line
    *   your_project_directory/client/assets/components/document/document_default/document_default.html
    */
   //In search results, for each doc, display this field as the head field
-  head_field: 'id',
+  head_field: 'og_title_t',
   subhead_field: 'subtitle',
-  description_field: 'description',
+  description_field: 'body_t',
   //In search results, for each doc, use this field to generate link value when a user clicks on head_field
-  head_url_field: 'url',
+  head_url_field: 'og_url_t',
   //In search results, display a image in each doc page (leave empty for no image).
   image_field: 'image',
 
