@@ -21,7 +21,8 @@ appConfig = { //eslint-disable-line
    * To use https set the https server key and certificate. And set use_https to true.
    */
   host: 'http://localhost',
-  port: '8764',
+  port: '8983',
+//  port: '8764',
 
   proxy_allow_self_signed_cert: false, // Only turn on if you have a self signed proxy in front of fusion.
 
@@ -56,7 +57,8 @@ appConfig = { //eslint-disable-line
   },
 
   // The name of your collection - defaults to Fusion 3.0 default collection
-  collection: 'default',
+//  collection: 'default',
+  collection: 'blogsand',
 
   // Please specify an app that you want to leverage with this UI (Fusion 4 only)
   // query_app_id: '',  for Fusion 3
@@ -71,11 +73,14 @@ appConfig = { //eslint-disable-line
   // Search UI Title
   // This title appears in a number of places in the app, including page title.
   // In the header it is replaced by the logo if one is provided.
-  search_app_title: 'Lucidworks View',
+//  search_app_title: 'Lucidworks View',
+  search_app_title: 'Solr Blogs and References',
   // Specify the path to your logo relative to the root app folder.
   // Or use an empty string if you don't want to use a logo.
   // This file is relative to the client folder of your app.
-  logo_location: 'assets/img/logo/lucidworks-white.svg',
+  logo_location: 'assets/img/logo/blogsand-white.svg',
+//  logo_location: 'assets/img/logo/lucidworks-white.svg',
+//  logo_location: '',
 
   /**
    * Document display
@@ -103,13 +108,18 @@ appConfig = { //eslint-disable-line
    *   your_project_directory/client/assets/components/document/document_default/document_default.html
    */
   //In search results, for each doc, display this field as the head field
-  head_field: 'id',
-  subhead_field: 'subtitle',
-  description_field: 'description',
+  //  head_field: 'id',
+  head_field: 'attr_og_title',   // or attr_title or attr_dc_title
+  subhead_field: 'subtitle',     // not used?
+  //description_field: 'description',
+  description_field: 'attr_og_description',  // or attr_description or attr_twitter_description
   //In search results, for each doc, use this field to generate link value when a user clicks on head_field
-  head_url_field: 'url',
+  //  head_url_field: 'url',
+  //  head_url_field: 'attr_og_url',
+  head_url_field: 'id',
   //In search results, display a image in each doc page (leave empty for no image).
-  image_field: 'image',
+  //  image_field: 'image',
+  image_field: 'attr_og_image',
 
   // ADDING ADDITIONAL FIELDS TO DEFAULT DOCUMENTS
   //
@@ -139,9 +149,11 @@ appConfig = { //eslint-disable-line
   //
   // The HTML/Angular template is located in the following directory:
   //    your_project_directory/client/assets/components/document/document.html
-  fields_to_display:['title','id','name', '*'],
+  //  fields_to_display:['title','id','name', '*'],
+  fields_to_display:['attr_content'],
   field_display_labels: {
-    'name': 'Document Name',
+      'name': 'Document Name',
+      'attr_content': 'Content',
     //'id': 'Identification Number'
     // you can add as many lines of labels as you want
   },
@@ -199,7 +211,9 @@ appConfig = { //eslint-disable-line
   typeahead_use_query_profile: false,
   typeahead_query_pipeline_id: 'default',
   typeahead_query_profile_id: 'default',
-  typeahead_fields: ['id'],
+  //  typeahead_fields: ['id'],
+    typeahead_fields: ['attr_og_title', 'attr_og_description'],
+    
   // The request handler defines how typeahead gets its results.
   // It is recommended to use suggest as it is more performant.
   // It will require some additional configuration.
