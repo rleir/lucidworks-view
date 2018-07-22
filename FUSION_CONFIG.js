@@ -14,6 +14,8 @@ appConfig = { //eslint-disable-line
    */
 
   /**
+   * Solr port number
+   *
    * localhost is used here for same computer use only.
    * You will need to put a hostname or ip address here if you want to go to
    * view this app from another machine.
@@ -22,7 +24,7 @@ appConfig = { //eslint-disable-line
    */
   host: 'http://localhost',
   port: '8983',
-//  port: '8764',
+//  port: '8764', Fusion server
 
   proxy_allow_self_signed_cert: false, // Only turn on if you have a self signed proxy in front of fusion.
 
