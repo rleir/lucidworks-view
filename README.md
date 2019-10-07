@@ -17,6 +17,10 @@ If you start by cloning the repository, you'll need the following software:
 - [Gulp](http://gulpjs.com/) and [Bower](http://bower.io): Run `npm install -g gulp bower`
 - Depending on how Node is configured on your machine, you may need to run `sudo npm install -g gulp bower` instead, if you get an error with the first command.
 
+## Use Solr Directly
+
+Fusion is a wrapper for the Solr and Lucene projects. You may want to skip Fusion and use Solr directly. See the useSolrDirectly branch of this project fork.
+
 ## Get Started
 
 1. Clone the repository, where `app` is the name of your app:
